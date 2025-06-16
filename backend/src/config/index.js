@@ -7,12 +7,12 @@ const config = {
     url: process.env.SUPABASE_URL,
     key: process.env.SUPABASE_KEY,
     jwtSecret: process.env.SUPABASE_JWT_SECRET,
-    projectUrl: process.env.SUPABASE_PROJECT_URL || 'https://phcmaevoakhwqcldsqxz.supabase.co'
+    projectUrl: process.env.SUPABASE_PROJECT_URL,
   },
   jwt: {
     secret: process.env.SUPABASE_JWT_SECRET,
-    issuer: process.env.SUPABASE_PROJECT_URL ? `${process.env.SUPABASE_PROJECT_URL}/auth/v1` : 'https://phcmaevoakhwqcldsqxz.supabase.co/auth/v1',
-    audience: 'authenticated'
+    issuer: process.env.SUPABASE_PROJECT_URL ? `${process.env.SUPABASE_PROJECT_URL}/auth/v1` : undefined,
+    audience: 'authenticated',
   },
   cors: {
     origin: [

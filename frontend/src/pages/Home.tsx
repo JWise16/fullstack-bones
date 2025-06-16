@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Welcome to StoryTown!</h1>
+      <h1>Welcome to Your App!</h1>
       <p>You are logged in as {session?.user?.email}</p>
       <button onClick={handleSignOut}>Sign Out</button>
       <button onClick={testBackend}>Test Backend</button>

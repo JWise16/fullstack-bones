@@ -1,7 +1,7 @@
 {
-  "name": "storytown-backend",
+  "name": "fullstack-template-backend",
   "version": "1.0.0",
-  "description": "StoryTown Backend API",
+  "description": "Full Stack Template Backend API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

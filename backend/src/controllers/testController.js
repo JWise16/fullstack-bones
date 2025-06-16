@@ -1,6 +1,6 @@
 const testController = {
   getPublic: (req, res) => {
-    res.send('StoryTown Backend operational');
+    res.send('Backend API is operational');
   },
 
   getProtected: (req, res) => {
