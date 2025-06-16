@@ -12,6 +12,10 @@ services:
       SUPABASE_URL: ${SUPABASE_URL}
       SUPABASE_KEY: ${SUPABASE_KEY}
       SUPABASE_JWT_SECRET: ${SUPABASE_JWT_SECRET}
+      SUPABASE_PROJECT_URL: ${SUPABASE_PROJECT_URL}
+      PROJECT_URL: ${PROJECT_URL}
+      FRONTEND_URL: ${FRONTEND_URL}
+      FRONTEND_DEV_URL: ${FRONTEND_DEV_URL}
     volumes:
       - ./backend:/app
       - /app/node_modules

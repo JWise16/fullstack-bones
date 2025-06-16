@@ -1,4 +1,4 @@
-Absolutely! Here’s a **comprehensive README template** tailored for your StoryTown repository, covering setup, development, deployment, authentication, and troubleshooting.
+Absolutely! Here's a **comprehensive README template** tailored for your StoryTown repository, covering setup, development, deployment, authentication, and troubleshooting.
 
 ---
 
@@ -51,19 +51,108 @@ Absolutely! Here’s a **comprehensive README template** tailored for your Story
    ```
 
 2. **Environment Variables:**
-   - Create a `.env` file in the root directory for backend variables:
-     ```
-     SUPABASE_URL=your-supabase-url
-     SUPABASE_KEY=your-supabase-anon-key
-     SUPABASE_JWT_SECRET=your-supabase-jwt-secret
-     ```
-   - For frontend, add `.env.local` in the `frontend` directory:
-     ```
-     REACT_APP_SUPABASE_URL=your-supabase-url
-     REACT_APP_SUPABASE_KEY=your-supabase-anon-key
-     ```
+   The project uses multiple `.env` files for different purposes:
 
-3. **Install dependencies:**
+   a. **Root `.env** (used by Docker Compose):
+   ```env
+   # Supabase Configuration
+   SUPABASE_URL=your_supabase_url
+   SUPABASE_KEY=your_supabase_anon_key
+   SUPABASE_JWT_SECRET=your_jwt_secret
+   SUPABASE_PROJECT_URL=your_supabase_project_url
+
+   # Frontend URLs
+   FRONTEND_URL=http://localhost:3000
+   FRONTEND_DEV_URL=http://localhost:3001
+   PROJECT_URL=http://localhost:3000
+
+   # Backend Configuration
+   PORT=5000
+   NODE_ENV=development
+   ```
+
+   b. **Backend `.env** (for local development):
+   ```env
+   # Backend-specific environment variables
+   PORT=5000
+   NODE_ENV=development
+
+   # These will be overridden by Docker Compose
+   SUPABASE_URL=
+   SUPABASE_KEY=
+   SUPABASE_JWT_SECRET=
+   SUPABASE_PROJECT_URL=
+
+   # These will be overridden by Docker Compose
+   FRONTEND_URL=
+   FRONTEND_DEV_URL=
+   PROJECT_URL=
+   ```
+
+   c. **Frontend `.env** (for local development):
+   ```env
+   # Frontend-specific environment variables
+   REACT_APP_API_URL=http://localhost:5000
+   REACT_APP_SUPABASE_URL=your_supabase_url
+   REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+   Setup steps:
+   1. Copy `.env.example` to `.env` in the root directory
+   2. Copy `backend/.env.example` to `backend/.env`
+   3. Copy `frontend/.env.example` to `frontend/.env`
+   4. Fill in the required values in each `.env` file
+
+   Note: When running with Docker, the root `.env` file takes precedence and will override the values in the backend and frontend `.env` files.
+
+3. **Supabase Setup:**
+   
+   a. **Create a Supabase Project:**
+   1. Go to [Supabase](https://supabase.com) and sign in
+   2. Click "New Project"
+   3. Fill in your project details:
+      - Name: "StoryTown"
+      - Database Password: (create a secure password)
+      - Region: (choose closest to your users)
+   4. Wait for the project to be created
+
+   b. **Get Project Configuration:**
+   1. In your Supabase dashboard, go to Project Settings
+   2. Under "API", you'll find:
+      - Project URL (needed for `SUPABASE_URL` and `SUPABASE_PROJECT_URL`)
+      - anon/public key (needed for `SUPABASE_KEY`)
+   3. Under "JWT Settings", you'll find:
+      - JWT Secret (needed for `SUPABASE_JWT_SECRET`)
+
+   c. **Configure Authentication:**
+   1. Go to Authentication > Settings
+   2. Configure your auth providers:
+      - Enable Email/Password authentication
+      - Configure any additional providers (Google, GitHub, etc.)
+   3. Under "URL Configuration":
+      - Set Site URL to your frontend URL (e.g., `http://localhost:3000` for development)
+      - Add additional redirect URLs if needed
+
+   d. **Security Settings:**
+   1. Go to Authentication > Policies
+   2. Review and configure Row Level Security (RLS) policies
+   3. Set up appropriate access controls for your tables
+
+   e. **Environment Variables:**
+   After getting your Supabase configuration, update your `.env` files:
+   ```env
+   # In root .env
+   SUPABASE_URL=https://your-project-id.supabase.co
+   SUPABASE_KEY=your-anon-key
+   SUPABASE_JWT_SECRET=your-jwt-secret
+   SUPABASE_PROJECT_URL=https://your-project-id.supabase.co
+
+   # In frontend/.env
+   REACT_APP_SUPABASE_URL=https://your-project-id.supabase.co
+   REACT_APP_SUPABASE_ANON_KEY=your-anon-key
+   ```
+
+4. **Install dependencies:**
    ```bash
    cd backend && npm install
    cd ../frontend && npm install
@@ -142,7 +231,7 @@ Absolutely! Here’s a **comprehensive README template** tailored for your Story
   - Decode the secret as base64 before use.
   - Log the token and secret for debugging.
 - **CORS Issues:**  
-  - Ensure the backend allows requests from your frontend’s origin.
+  - Ensure the backend allows requests from your frontend's origin.
 - **Environment Variables:**  
   - Check that variables are loaded in both Docker and your code.
 
