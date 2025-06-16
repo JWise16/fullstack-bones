@@ -12,6 +12,7 @@ export default function Home() {
 
   const testBackend = async () => {
     const token = session?.access_token;
+    console.log('Token:', token); // Add this line
     const response = await fetch('http://localhost:5001/api/protected', {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -20,6 +21,7 @@ export default function Home() {
     const data = await response.json();
     alert(JSON.stringify(data));
   };
+  
 
   return (
     <div>
